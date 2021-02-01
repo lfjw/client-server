@@ -3,6 +3,7 @@
     "addresss",
     "nestjs",
     "prebuild",
+    "rbac",
     "repassword",
     "tinyint",
     "varchar"
