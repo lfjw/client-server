@@ -1,10 +1,6 @@
 import { defineComponent } from "vue";
 export default defineComponent({
   setup() {
-    return () => (
-      <div>
-        daily record
-      </div>
-    )
+    return () => <div style="height:10000px;">daily record</div>;
   }
-})
+});

@@ -35,11 +35,11 @@ const routers: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: "/parameter-management",
-    name: 'ParameterManagement',
-    component: () => import(/* webpackChunkName: "ParameterManagement" */  '@/views/SystemManagement/ParameterManagement/index'),
+    path: "/role-authority-management",
+    name: 'RoleAuthorityManagement',
+    component: () => import(/* webpackChunkName: "RoleAuthorityManagement" */  '@/views/SystemManagement/RoleAuthorityManagement/index'),
     meta: {
-      title: "参数管理",
+      title: "角色权限管理",
     }
   },
 ]

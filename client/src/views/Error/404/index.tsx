@@ -1,16 +1,16 @@
 import { defineComponent } from "vue";
 import "./index.less";
-import img1 from "@/assets/error_pages/404.png";
-import img2 from "@/assets/error_pages/404_cloud.png";
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router";
+const img1 = require("@/assets/error_pages/404.png");
+const img2 = require("@/assets/error_pages/404_cloud.png");
 
 export default defineComponent({
   setup() {
-    const router = useRouter()
-    const message = "We can't seem to find the page you're looking for."
+    const router = useRouter();
+    const message = "We can't seem to find the page you're looking for.";
 
     function backHome() {
-      router.push({ path: '/' })
+      router.push({ path: "/" });
     }
 
     return () => (
@@ -25,12 +25,16 @@ export default defineComponent({
           <div class="bullshit">
             <div class="bullshit__oops">OOPS!</div>
             <div class="bullshit__headline">{message}</div>
-            <div class="bullshit__info">Please check that the URL you entered is correct, or click the button below to return to the homepage.</div>
-            <div class="bullshit__return-home" onClick={backHome}>Back to home</div>
+            <div class="bullshit__info">
+              Please check that the URL you entered is correct, or click the
+              button below to return to the homepage.
+            </div>
+            <div class="bullshit__return-home" onClick={backHome}>
+              Back to home
+            </div>
           </div>
         </div>
       </div>
-    )
+    );
   }
-})
-
+});
