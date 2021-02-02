@@ -13,6 +13,16 @@ nest g [文件类型] [文件名] [文件目录（src目录下）]
 nest g service user logical
 nest g controller user logical
 nest g module user logical
+
+# 系统管理
+nest g service system-management logical
+nest g controller system-management logical
+nest g module system-management logical
+
+# 字典管理
+nest g service dictionary-management logical/system-management
+nest g controller dictionary-management logical/system-management
+nest g module dictionary-management logical/system-management
 ```
 
 ## 连接数据库
@@ -26,3 +36,20 @@ npm i sequelize mysql2 -S
 ## 原生语句操作 mysql
 
 - 如果使用便捷方法，多了一步操作
+
+## 守卫（验证 TOKEN）
+
+## 管道
+
+```sh
+npm i class-validator class-transformer -S
+```
+
+`ValidationPipe` 是 Nest.js 自带的三个开箱即用的管道之一（另外两个是 `ParseIntPipe` 和 `ParseUUIDPipe`，现在还用不到）
+
+管道和拦截器有点像，都是在数据传输过程中的“关卡”，只不过各司其职。
+
+管道有两个类型:
+
+- 转换：管道将输入数据转换为所需的数据输出；
+- 验证：对输入数据进行验证，如果验证成功继续传递，验证失败则抛出异常；

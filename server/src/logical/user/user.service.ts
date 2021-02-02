@@ -3,6 +3,7 @@ import * as Sequelize from 'sequelize';
 import sequelize from '../../database/sequelize';
 import { encryptPassword, makeSalt } from '../../utils/cryptogram';
 import { User } from '../../typings';
+import { RegisterInfoDTO } from './dto/user.dto';
 @Injectable()
 export class UserService {
   /**
@@ -10,7 +11,13 @@ export class UserService {
    * @param username 用户名
    */
   async findOne(username: string) {
-    const sql = ` SELECT id, username, password, passwd_salt FROM users WHERE username = '${username}'`;
+    const sql = ` 
+      SELECT 
+        id, username, password, passwd_salt 
+      FROM 
+        users 
+      WHERE 
+        username = '${username}'`;
     try {
       const res = await sequelize.query(sql, {
         type: Sequelize.QueryTypes.SELECT, // 查询方式
@@ -27,7 +34,7 @@ export class UserService {
    * 注册用户
    * @param requestBody
    */
-  async register(requestBody: User) {
+  async register(requestBody: RegisterInfoDTO) {
     const user = await this.findOne(requestBody.username);
     if (user) {
       return { code: 400, msg: '用户已存在~' };

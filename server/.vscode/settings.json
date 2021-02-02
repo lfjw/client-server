@@ -1,7 +1,10 @@
 {
   "cSpell.ignoreWords": [
     "addresss",
+    "appenders",
+    "metatype",
     "nestjs",
+    "parmas",
     "prebuild",
     "rbac",
     "repassword",

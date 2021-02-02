@@ -9,7 +9,7 @@ export class AuthService {
   constructor(
     private readonly usersService: UserService,
     private readonly jwtService: JwtService,
-  ) {}
+  ) { }
   // 验证逻辑
   async validateUser(username, password) {
     console.log('JWT验证 - Step 2: 校验用户信息');

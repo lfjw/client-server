@@ -1,6 +1,8 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, UsePipes } from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthService } from '../auth/auth.service';
+import { RegisterInfoDTO } from './dto/user.dto';
+import { ValidationPipe } from 'src/pipe/validation.pipe';
 import { User } from 'src/typings';
 
 @Controller('user')
@@ -9,10 +11,21 @@ export class UserController {
     private readonly authService: AuthService,
     private readonly usersService: UserService,
   ) {}
+
+  /**
+   * 注册
+   * @param body
+   */
+  @UsePipes(new ValidationPipe())
   @Post('register')
-  findOne(@Body() body: any) {
+  register(@Body() body: RegisterInfoDTO) {
     return this.usersService.register(body);
   }
+
+  /**
+   * 登录
+   * @param body
+   */
   @Post('login')
   async login(@Body() body: User) {
     try {
