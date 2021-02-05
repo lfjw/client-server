@@ -25,7 +25,7 @@ export class RegisterInfoDTO {
   @IsNotEmpty({ message: '生日不能为空' })
   readonly birthday: Date; // 生日
 
-  readonly last_login: Date; // 上次登录时间
-  readonly create_time: Date; //  创建时间
+  readonly last_login: Date | string; // 上次登录时间
+  readonly create_time: Date | string; //  创建时间
   readonly address?: string; // 地址
 }

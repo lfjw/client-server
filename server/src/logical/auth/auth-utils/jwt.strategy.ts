@@ -6,6 +6,12 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
 import { jwtConstants } from './constants';
+import { User } from 'src/typings';
+
+export interface ValidateJWTReturns {
+  id: number;
+  username: string;
+}
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -18,15 +24,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   // JWT验证 - Step 4: 被守卫调用
-  async validate(payload: any) {
+  async validate(payload: User) {
     console.log(`JWT验证 - Step 4: 被守卫调用`);
-    console.log(payload, 'ddddddpayload');
     // 查取权限
-    return {
-      userId: payload.sub,
+    const item: ValidateJWTReturns = {
+      id: payload.id,
       username: payload.username,
-      realName: payload.realName,
-      role: payload.role,
     };
+    return item;
   }
 }

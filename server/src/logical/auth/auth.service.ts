@@ -20,12 +20,12 @@ export class AuthService {
       // 通过密码盐，加密传参，再与数据库里的比较，判断是否相等
       const hashPassword = encryptPassword(password, salt);
       if (hashedPassword === hashPassword) {
-        return { code: 1, user };
+        return { isUser: true, user };
       } else {
-        return { code: 2, user: null };
+        return { isUser: false };
       }
     } else {
-      return { code: 3, user: null };
+      return { isUser: false };
     }
   }
   // JWT验证 - Step 3: 处理 jwt 签证
@@ -34,15 +34,9 @@ export class AuthService {
     console.log('JWT验证 - Step 3: 处理 jwt 签证');
     try {
       const token = await this.jwtService.sign(payload);
-      return {
-        code: 200,
-        data: {
-          token,
-        },
-        msg: `登录成功`,
-      };
+      return { isResult: true, data: { token, user } };
     } catch (error) {
-      return { code: 600, msg: `账号或密码错误` };
+      return { isResult: false };
     }
   }
 }
