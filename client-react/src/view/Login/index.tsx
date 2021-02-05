@@ -2,7 +2,7 @@ import { Form, Input, Button } from "antd";
 import { login } from "../../api/system";
 import { LoginParams } from "../../typings/index";
 import { useState } from "react";
-
+import { useHistory } from "react-router-dom";
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 8 },
@@ -12,6 +12,7 @@ const tailLayout = {
 };
 
 function Login() {
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
 
   const onFinish = async (values: LoginParams) => {
@@ -23,6 +24,7 @@ function Login() {
       });
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userInfo", JSON.stringify(res.data.user));
+      history.push("/");
     } catch (error) {}
     setLoading(false);
   };

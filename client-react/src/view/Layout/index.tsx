@@ -1,9 +1,17 @@
-import { BrowserRouter as Router, Switch } from "react-router-dom";
-function Layout() {
+import { Switch } from "react-router-dom";
+import { RouteWithSubRoutes } from "../../App";
+import { RouteType } from "../../route/index";
+
+function Layout(props: any) {
+  const routes: Array<RouteType> = props.routes;
   return (
-    <Router>
-      <Switch></Switch>
-    </Router>
+    <>
+      <Switch>
+        {routes.map((route, i) => (
+          <RouteWithSubRoutes key={i} {...route} />
+        ))}
+      </Switch>
+    </>
   );
 }
 

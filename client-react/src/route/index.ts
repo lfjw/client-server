@@ -1,24 +1,32 @@
 
+import ErrorPage404 from '../view/ErrorPage/404'
 import Layout from '../view/Layout/index'
 import Login from '../view/Login/index'
 import Register from '../view/Register/index'
-
-import Dictionary from '../view/System/Dictionary/index'
-
-import Menu from '../view/System/Menu/index'
 
 export interface RouteType {
   path: string;
   name: string;
   component: any;
-  auth?: boolean;
+  auth?: boolean; // 是否验证登录
   title?: string;
+  children?: Array<RouteType>
 }
+
+const req = (require as any).context('./modules', false, /\.ts$/)
+let children: Array<any> = []
+req.keys().forEach((key: any) => { children = children.concat(req(key).default) })
+
 const routes: Array<RouteType> = [
   {
-    path: '/',
-    name: "Layout",
-    component: Layout,
+    path: '/404',
+    name: "404",
+    component: ErrorPage404,
+  },
+  {
+    path: '/401',
+    name: "401",
+    component: ErrorPage404,
   },
   {
     path: '/login',
@@ -31,19 +39,11 @@ const routes: Array<RouteType> = [
     component: Register,
   },
   {
-    path: '/dictionary',
-    name: "Dictionary",
-    component: Dictionary,
-    auth: true,
-    title: "字典管理"
+    path: '/',
+    name: "Layout",
+    component: Layout,
+    children
   },
-  {
-    path: '/menu',
-    name: "Menu",
-    component: Menu,
-    auth: true,
-    title: "菜单管理"
-  }
-
 ]
+
 export default routes
